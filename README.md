@@ -1,5 +1,3 @@
-# laboratorio3Cognitive
-Creación con flask y mariaDB
 ## Flash CRUD MVC
 
 # Estructura de carpetas

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Productos{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Lista de Productos</h2>
+</div>
+
+{% if productos %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Descripción</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for producto in productos %}
+        <tr>
+            <td>{{ producto.id }}</td>
+            <td>{{ producto.nombre }}</td>
+            <td>{{ producto.descripcion[:50] }}...</td>
+            <td>${{ "%.2f"|format(producto.precio) }}</td>
+            <td>{{ producto.cantidad }}</td>
+            <td class="actions">
+                <a href="{{ url_for('productos.ver', id=producto.id) }}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{{ url_for('productos.editar', id=producto.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('productos.eliminar', id=producto.id) }}" method="POST" style="display:inline;" 
+                      onsubmit="return confirm('¿Está seguro de eliminar este producto?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    No hay productos registrados. <a href="{{ url_for('productos.crear') }}">Crear el primero</a>
+</div>
+{% endif %}
+{% endblock %}

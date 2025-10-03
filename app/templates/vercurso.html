@@ -1,0 +1,32 @@
+{% extends "basecurso.html" %}
+
+{% block title %}Ver Curso{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Detalles del Curso</h2>
+</div>
+
+<div class="course-details">
+    <div class="detail-row">
+        <strong>ID:</strong>
+        <span>{{ curso.id }}</span>
+    </div>
+    
+    <div class="detail-row">
+        <strong>Nombre:</strong>
+        <span>{{ curso.nombre }}</span>
+    </div>
+    
+    <div class="detail-row">
+        <strong>Créditos:</strong>
+        <span>{{ curso.creditos if curso.creditos else 'Sin créditos' }}</span>
+    </div>
+    
+</div>
+
+<div class="form-actions">
+    <a href="{{ url_for('cursos.editar', id=curso.id) }}" class="btn btn-warning">Editar</a>
+    <a href="{{ url_for('cursos.index') }}" class="btn btn-secondary">Volver</a>
+</div>
+{% endblock %}

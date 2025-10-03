@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Ver Producto{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Detalles del Producto</h2>
+</div>
+
+<div class="product-details">
+    <div class="detail-row">
+        <strong>ID:</strong>
+        <span>{{ producto.id }}</span>
+    </div>
+    
+    <div class="detail-row">
+        <strong>Nombre:</strong>
+        <span>{{ producto.nombre }}</span>
+    </div>
+    
+    <div class="detail-row">
+        <strong>Descripción:</strong>
+        <span>{{ producto.descripcion if producto.descripcion else 'Sin descripción' }}</span>
+    </div>
+    
+    <div class="detail-row">
+        <strong>Precio:</strong>
+        <span>${{ "%.2f"|format(producto.precio) }}</span>
+    </div>
+    
+    <div class="detail-row">
+        <strong>Cantidad:</strong>
+        <span>{{ producto.cantidad }}</span>
+    </div>
+</div>
+
+<div class="form-actions">
+    <a href="{{ url_for('productos.editar', id=producto.id) }}" class="btn btn-warning">Editar</a>
+    <a href="{{ url_for('productos.index') }}" class="btn btn-secondary">Volver</a>
+</div>
+{% endblock %}

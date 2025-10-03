@@ -1,0 +1,43 @@
+{% extends "basecurso.html" %}
+
+{% block title %}Lista de Cursos{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h2>Lista de Cursos</h2>
+</div>
+
+{% if cursos %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Creditos</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for curso in cursos %}
+        <tr>
+            <td>{{ curso.id }}</td>
+            <td>{{ curso.nombre }}</td>
+            <td>{{ curso.creditos}}</td>
+            <td class="actions">
+                <a href="{{ url_for('cursos.ver', id=curso.id) }}" class="btn btn-info btn-sm">Ver</a>
+                <a href="{{ url_for('cursos.editar', id=curso.id) }}" class="btn btn-warning btn-sm">Editar</a>
+                <form action="{{ url_for('cursos.eliminar', id=curso.id) }}" method="POST" style="display:inline;" 
+                      onsubmit="return confirm('¿Está seguro de eliminar este curso?');">
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="alert alert-info">
+    No hay cursos registrados. <a href="{{ url_for('cursos.crear') }}">Crear el primero</a>
+</div>
+{% endif %}
+{% endblock %}
